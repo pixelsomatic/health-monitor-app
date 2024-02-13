@@ -1,9 +1,12 @@
 import React from 'react';
 import LoginForm from '../molecules/LoginForm';
+import { View } from 'react-native';
 
 const LoginScreen = () => {
   return (
-    <LoginForm />
+    <View>
+      <LoginForm />
+    </View>
   );
 };
 
