@@ -9,7 +9,8 @@ type SearchInputProps = {
   value?: string;
   label: string;
   secureTextEntry?: boolean;
-  type?: 'email-address'
+  type?: 'email-address';
+  placeholder: string;
 };
 
 const TextInput = ({
@@ -17,7 +18,8 @@ const TextInput = ({
   value, 
   label, 
   secureTextEntry,
-  type
+  type,
+  placeholder
 }: SearchInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -25,7 +27,7 @@ const TextInput = ({
     <RNInputText
       keyboardType={type}
       mode="flat"
-      placeholder="Add your best e-mail address"
+      placeholder={placeholder}
       onChangeText={text => onChange(text)}
       value={value}
       style={styles.input}

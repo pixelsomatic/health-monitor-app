@@ -9,7 +9,8 @@ import { VariantProp } from 'react-native-paper/lib/typescript/components/Typogr
 type TextProps = {
   children: React.ReactNode;
   variant?: VariantProp<keyof typeof typography>;
-  type: 'header' | 'labelButton';
+  type: 'header' | 'labelButton' | 'headerBold' | 'text';
+
 };
 
 const Text = ({variant, children, type}: TextProps) => (
@@ -27,9 +28,16 @@ const styles = StyleSheet.create({
   header: {
     marginBottom: sizes.md,
   },
+  headerBold: {
+    fontWeight: 'bold',
+    marginBottom: sizes.md,
+  },
   buttonLabel: {
     marginBottom: sizes.none,
     textAlign: 'center',
     color: colors.text
+  },
+  text: {
+    marginBottom: sizes.sm,
   }
 })
