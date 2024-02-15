@@ -2,11 +2,14 @@ import React from 'react';
 import LoginForm from '../molecules/LoginForm';
 import { StyleSheet, View } from 'react-native';
 import { colors } from '../../designSystem/color';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../App';
 
-const LoginScreen = () => {
+export type LoginScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Login'>;
+const LoginScreen = ({ navigation }:  { navigation: LoginScreenNavigationProp }) => {
   return (
     <View style={styles.container}>
-      <LoginForm />
+      <LoginForm navigation={navigation} />
     </View>
   );
 };

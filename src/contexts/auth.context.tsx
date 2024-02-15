@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import React, { createContext, useEffect, useState } from "react";
-import Constants from 'expo-constants';
+import Toast from 'react-native-toast-message';
 import {
   inMemoryPersistence,
   getAuth, 
@@ -52,21 +52,33 @@ export const AuthProvider = ({ children }) => {
     const myAuth = getAuth();
     try {
       const response = await signInWithEmailAndPassword(myAuth, email, password);
+      showToast('success', 'Sign in successful!');
       const token = await response.user.getIdToken();
       token ? setIsSigned(true) : setIsSigned(false);
     } catch (error) {
-      console.log('SignIn Error', error);
-      setIsSigned(false)
+      showToast('error', 'Invalid email or password');
+      setIsSigned(false);
     }
+  }
+  
+  const showToast = (type: 'success' | 'error', text: string) => {
+    Toast.show({
+      type: type,
+      text1: text,
+    });
   }
 
   const signUp = async (email: string, password: string) => {
     const myAuth = getAuth();
     try {
       const response = await createUserWithEmailAndPassword(myAuth, email, password)
-      console.log(response, 'aa')
+      showToast('success','Sign up successful!');
+      const token = await response.user.getIdToken();
+      token ? setIsSigned(true) : setIsSigned(false);
+      
     } catch (error) {
-      console.log(error)
+      showToast('error','Sign up error or user already exist');
+      setIsSigned(false);
     }
   }
 

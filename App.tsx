@@ -1,15 +1,12 @@
 import React from 'react';
-import LoginScreen from './src/components/organisms/LoginScreen';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './src/components/organisms/HomeScreen';
 import { AuthProvider } from './src/contexts/auth.context';
 import Routes from './src/routes';
-
-const Stack = createNativeStackNavigator();
+import Toast from 'react-native-toast-message';
 
 export type RootStackParamList = {
   Login: undefined;
+  SignUp: {email: string, password: string};
   Home: { itemId: number, otherParam: string };
 };
 
@@ -19,6 +16,7 @@ export default function App() {
       <AuthProvider>
         <Routes/>
       </AuthProvider>
+      <Toast/>
     </NavigationContainer>
   );
 }
