@@ -4,6 +4,7 @@ import HomeScreen from '../components/organisms/HomeScreen'
 import { Icon, MD3Colors } from 'react-native-paper';
 import { TouchableOpacity, View } from 'react-native';
 import AuthContext from '../contexts/auth.context';
+import { colors } from '../designSystem/color';
 
 const AppStack = createStackNavigator();
 
@@ -16,7 +17,9 @@ const AppRoutes = () => {
         name="Home" 
         component={HomeScreen} 
         options={{
-          headerTransparent: true,
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
           title: "Health",
           headerTitleAlign: 'center',
           headerLeft: () => <></>,
