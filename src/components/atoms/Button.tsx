@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Button as RNButton } from 'react-native-paper';
+import { ActivityIndicator, Button as RNButton } from 'react-native-paper';
 import Text from './Text';
 import { colors } from '../../designSystem/color';
 import { sizes } from '../../designSystem/grid';
@@ -10,12 +10,17 @@ type ButtonProps = {
   onSubmit: () => void;
   buttonColor?: string;
   textColor?: string;
+  loading?: boolean;
 }
 
-const Button = ({ onSubmit, children, buttonColor, textColor }: ButtonProps) => {
+const Button = ({ onSubmit, children, loading }: ButtonProps) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onSubmit}>
-      <Text type='labelButton' variant='labelLarge'>{children}</Text>
+      {loading ? (
+        <ActivityIndicator size={'small'} />
+      ) : (
+        <Text type='labelButton' variant='labelLarge'>{children}</Text>
+      )}
     </TouchableOpacity>
    
   );
@@ -30,6 +35,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     borderRadius: 5,
+    flexDirection: 'row',
     width: sizes.eighty
   }
 })

@@ -1,28 +1,62 @@
 import React, { useState } from "react"
 import FormButton from "../atoms/FormButton";
-import { StyleSheet, View } from "react-native";
+import { Keyboard, StyleSheet, View } from "react-native";
 import FormRow from "../atoms/FormRow";
 import { Modal } from "react-native-paper";
 import TextInput from "../atoms/TextInput";
 import { HealthFields } from "../../enums/HealthData.enum";
 import Button from "../atoms/Button";
+import { HealthData } from "../../types/data.type";
+import Text from "../atoms/Text";
+import Toast from 'react-native-toast-message';
 
-const HealthForm = () => {
+type HealthFormProps = {
+  sendHealthData: (data: HealthData) => Promise<string>;
+}
+
+const HealthForm = ({sendHealthData}: HealthFormProps) => {
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [selectedRow, setSelectedRow] = useState<[string, HealthFields]>();
-  const [healthData, setHealthData] = useState({});
+  const [healthData, setHealthData] = useState<HealthData>();
+  const [openAIResponse, setOpenAIResponse] = useState('');
 
   const showModal = (field: [string, HealthFields]) => {
     setSelectedRow(field);
     setVisible(true);
   };
-  const hideModal = () => setVisible(false);
+  const hideModal = () => {
+    Keyboard.dismiss()
+    setVisible(false);
+  };
 
   const handleLogData = (field: string, value: string) => {
     setHealthData({
       ...healthData,
       [field]: value,
     });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      if (!healthData || !Object.values(healthData).some((value) => value)) {
+        Toast.show({
+          type: 'info',
+          text1: 'Please fill in at least one health data field.',
+        });
+        return;
+      }
+      setLoading(true);
+      const response = await sendHealthData(healthData);
+      setOpenAIResponse(response);
+      setLoading(false);  
+    } catch (error) {
+      console.log('Submit health data error: ', error);
+      Toast.show({
+        type: 'error',
+        text1: 'Incorrect health data.',
+      });
+    }
   };
 
   return (
@@ -38,8 +72,18 @@ const HealthForm = () => {
         </View>
       ))}
     </View>
+    {openAIResponse ? (
+      <View>
+        <Text type='headerBold' variant="headlineSmall">
+          Health Data Insights
+        </Text>
+        <Text type="text" variant="bodyLarge">
+          {openAIResponse}
+        </Text>
+      </View>
+    ) : <></>}
     <View style={styles.submitButton}>
-    <Button onSubmit={() => console.log('first')}>
+    <Button loading={loading} onSubmit={() => handleSubmit()}>
       Submit
     </Button>
     </View>

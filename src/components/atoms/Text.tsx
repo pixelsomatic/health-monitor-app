@@ -16,7 +16,7 @@ type TextProps = {
 const Text = ({variant, children, type}: TextProps) => (
   <RNText
     variant={variant}
-    style={type === 'header' ? styles.header : styles.buttonLabel}
+    style={styles[type]}
   >
     {children}
   </RNText>

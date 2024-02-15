@@ -1,6 +1,6 @@
 export enum HealthFields {
-  BloodPressure = 'Blood Pressure',
-  HeartRate = 'Heart Rate',
-  Weight = 'Weight',
-  BloodGlucose = 'Blood Glucose'
+  bloodPressure = 'Blood Pressure',
+  heartRate = 'Heart Rate',
+  weight = 'Weight',
+  bloodGlucose = 'Blood Glucose'
 }
