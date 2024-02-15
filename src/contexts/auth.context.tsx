@@ -7,17 +7,20 @@ import {
   initializeAuth, 
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signOut
 } from 'firebase/auth';
 
 type AuthContextType = {
   signIn: (email: string, password: string) => void;
   signUp: (email: string, password: string) => void;
+  logOut: () => void;
   isSigned: boolean;
 };
 
 const AuthContext = createContext<AuthContextType>({
   signIn: () => {},
   signUp: () => {},
+  logOut: () => {},
   isSigned: false
 });
 
@@ -82,10 +85,21 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  const logOut = async () => {
+    const myAuth = getAuth();
+    try {
+      await signOut(myAuth);
+      setIsSigned(false);
+    } catch (error) {
+      showToast('error','Something went wrong, try again later');
+    }
+  }
+
   return (
     <AuthContext.Provider value={{
       signIn,
       isSigned,
+      logOut,
       signUp,
     }}>
       {children}
