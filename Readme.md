@@ -68,6 +68,13 @@ This README file provides an overview of the Health Monitor App, a React Native 
 - OpenAI API integration for generating insights
 - Health data logging and visualization
 
+https://github.com/pixelsomatic/health-monitor-app/assets/52505144/b00529a0-5ec3-41ef-a883-2fa07b7adb19
+
+https://github.com/pixelsomatic/health-monitor-app/assets/52505144/545cf71a-53d4-467f-886f-59e68bc5e8fa
+
+https://github.com/pixelsomatic/health-monitor-app/assets/52505144/d0089360-5991-402f-9b06-a5548de29aec
+
+
 ## License
 
 This project is licensed under the MIT License.
