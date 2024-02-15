@@ -9,7 +9,7 @@ type SearchInputProps = {
   value?: string;
   label: string;
   secureTextEntry?: boolean;
-  type?: 'email-address';
+  type?: 'email-address' | 'default';
   placeholder: string;
 };
 

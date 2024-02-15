@@ -11,7 +11,13 @@ const FormRow = ({title, value}: FormRowProps) => {
   return (
     <View>
       <Text type="text" variant="titleMedium">{title}</Text>
-      {value ? <Text type="text" variant="bodyMedium">{value}</Text> : <></>}
+      {value ? (
+        <View style={{alignItems: 'flex-start'}}>
+          <Text type="text" variant="bodyMedium">{value}</Text>
+        </View>
+      ) : (
+        <></>
+      )}
     </View>
   );
 }
